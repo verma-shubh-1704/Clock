@@ -1,60 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Calculator</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="styles.css" rel="stylesheet">
+  <script defer src="script.js"></script>
+  <title>Clock</title>
 
-    <!-- calculator.css -->
-    <link rel="stylesheet" href="dist/css/calculator.css" />
-  </head>
-  <body>
-    <div class="wrapper">
-      <div class="calculator">
-        <div class="calculator-header">
-                <div class="theme-switch-wrapper">
-                        <label class="theme-switch" for="checkbox">
-                            <input type="checkbox" id="checkbox" />
-                            <div class="slider round"></div>
-                      </label>
-                    </div>
-        </div>
-        <div class="calculator-body">
-          <div style="text-align: right">
-            <h1 id="output">0</h1>
-            <p id="input"></p>
-          </div>
-        </div>
-        <div class="calculator-footer">
-          <div class="symbol" onclick="calculate('C')"><span>C</span></div>
-          <div class="symbol" onclick="calculate('AC')"><span>AC</span></div>
-          <div class="symbol" onclick="calculate('%')"><span>%</span></div>
-          <div class="symbol" onclick="calculate('/')"><span>/</span></div>
-          <div onclick="calculate('7')"><span>7</span></div>
-          <div onclick="calculate('8')"><span>8</span></div>
-          <div onclick="calculate('9')"><span>9</span></div>
-          <div onclick="calculate('*')" class="symbol"><span>x</span></div>
-          <div onclick="calculate('4')"><span>4</span></div>
-          <div onclick="calculate('5')"><span>5</span></div>
-          <div onclick="calculate('6')"><span>6</span></div>
-          <div onclick="calculate('-')" class="symbol"><span>-</span></div>
-          <div onclick="calculate('1')"><span>1</span></div>
-          <div onclick="calculate('2')"><span>2</span></div>
-          <div onclick="calculate('3')"><span>3</span></div>
-          <div onclick="calculate('+')" class="symbol"><span>+</span></div>
-          <div onclick="calculate('0')"><span>0</span></div>
-          <div onclick="calculate('00')"><span>00</span></div>
-          <div onclick="calculate('.')"><span>.</span></div>
-          <div onclick="calculate('=')" class="symbol-dark"><span>=</span></div>
-        </div>
-      </div>
-    </div>
+  <style type="text/css">
+		.clock-annual {
+      margin-top: 250px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translateX(-50%) translateY(-50%);
+			color: #fff;
+			font-size: 50px;
+			border: 1px solid #ccc;
+			padding: 0px 5px 0px 5px;
+		}
+		</style>
+</head>
+<body>
+  <div class="clock">
+    <div class="hand hour" data-hour-hand></div>
+    <div class="hand minute" data-minute-hand></div>
+    <div class="hand second" data-second-hand></div>
+    <div class="number number1">1</div>
+    <div class="number number2">2</div>
+    <div class="number number3">3</div>
+    <div class="number number4">4</div>
+    <div class="number number5">5</div>
+    <div class="number number6">6</div>
+    <div class="number number7">7</div>
+    <div class="number number8">8</div>
+    <div class="number number9">9</div>
+    <div class="number number10">10</div>
+    <div class="number number11">11</div>
+    <div class="number number12">12</div>
+  </div>
+  <br>
+  <div id="MyClockDisplay" class="clock-annual"></div>
 
-    <!-- Math.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/6.2.1/math.js"></script>
 
-    <!-- calculator.js -->
-    <script src="dist/js/calculator.js"></script>
-  </body>
+  <script type="text/javascript">
+
+    function showTime(){
+      var date = new Date();
+      var h = date.getHours(); // 0 - 23
+      var m = date.getMinutes(); // 0 - 59
+      var s = date.getSeconds(); // 0 - 59
+      var session = "AM";
+      
+      if(h >= 12){
+        h = h - 12;
+        session = "PM";
+      }
+
+      if(h == 0){
+        h = 12;
+      }
+
+      h = (h < 10) ? "0" + h : h;
+      m = (m < 10) ? "0" + m : m;
+      s = (s < 10) ? "0" + s : s;
+
+      var time = h + ":" + m + ":" + s + " " + session;
+      document.getElementById("MyClockDisplay").innerText = time;
+      document.getElementById("MyClockDisplay").textContent = time;
+
+      setTimeout(showTime, 1000);
+    }
+
+    showTime();
+
+  </script>
+</body>
 </html>
